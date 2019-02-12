@@ -5,7 +5,17 @@ services:
 before_install:
 - docker pull dpollet/texlive:full
 script:
-- docker run --tty --rm --volume $PWD:/work dpollet/texlive:full bash -c "xelatex cv_delay.tex; biber cv_delay.bcf; xelatex cv_delay.tex"
+- docker run --tty --rm --volume $PWD:/work dpollet/texlive:full bash -c "
+  cd fonts/;
+  unzip awesome-terminal-fonts-master.zip;
+  unzip xits-math-master.zip;
+  tar -xzf ttf-mac-fonts.tar.gz;
+  cd ../;
+  sudo cp -rfv .fonts /usr/share/fonts/;
+  fc-cache -fv;
+  xelatex cv_delay.tex;
+  biber cv_delay.bcf;
+  xelatex cv_delay.tex"
 
 deploy:
   provider: releases
