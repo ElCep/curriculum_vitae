@@ -1,30 +1,16 @@
 notifications:
   email: false
-install:
-  # Silent install from conda docs
-  # https://conda.io/docs/user-guide/install/macos.html#install-macos-silent
-  # adapted using
-  # https://conda.io/docs/user-guide/tasks/use-conda-with-travis-ci.html
-
-  # Needed to check if conda already installed
-  - export PATH="$HOME/miniconda/bin:$PATH"
-
-  # If not yet installed, obtain Miniconda
-  # and tectonic
-  # From tectonic docs
-  # https://tectonic-typesetting.github.io/en-US/install.html#the-anaconda-method
-  - if ! command -v conda > /dev/null; then
-      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-      bash miniconda.sh -b -p $HOME/miniconda -u;
-      conda config --add channels conda-forge;
-      conda config --set always_yes yes;
-      conda update --all;
-      conda install tectonic;
-    fi
-  - conda info -a
-cache:
-  directories:
-    - $HOME/miniconda
-    - $HOME/.cache/Tectonic
+services:
+- docker
+before_install:
+- docker pull thomasweise/docker-texlive-full
 script:
- - tectonic ./cv_delay.tex --print
+- docker run --tty --rm --volume $PWD:/work thomasweise/docker-texlive-full bash -c "xelatex cv_delay; biber cv_delay; xelatex cv_delay"
+
+deploy:
+  provider: releases
+  api_key:
+    secure: mJbViHrMJzso+2NFVva657Y5H6CO1dKX+hM85skiRWQkU615y4hFkPgMZmtF1K3mAC0iir7Na8B9+Cvhj5ESlEhtAMtavcGQB+cWM8gMAwSfjOnhDzIWjMBUZB0zDLot64dk3zOv5E8jhm8gmzUc0cDj5ff34eFqptIJuppuQY6DUqIWBiW2t9L1LOYw2wqRKhI62vF505YcyFXJAKPKCipG2Xb/xjF2iiqm90WEJcLI0p0LrU4NOxFuBgBYCHU01P2rLFhW5IMfN2T1EQaryWZxJq4hgKm7E5IPxp8o9EynRD4iNic2BMWJbCMVwF/TJNvM9vTzAhSVMVbum2vxbA1J1CKb1XGV7q9dNt6QEpINYst6bx+th7oS1sK2JT0AG5Vn+r/LplISHguTqew6rFqvv9jo3Lo1ZHOmAuRz6Tz5o0zfVSxa/iHNKOqNPRc1SBQ8i1AWWTYja5rQ5Q3s5KK4LAyAs2lKfd93+kb3MrMR21CrmiWyqGqOVbN25fyxk3KnuGZfPGxjSb2wajvOA/i+u+I6DhLCdREE7OY1gEd7rr6asQpU70fKqI1qn+0InFfcxhqT1C9FMFV1WhbJFDtPRC0hIWjrsVxGf0cQLVE3WcOykko/lKen0fm6ZQTJVZsShhxxcyLTn09aJGrCrC7pmIz6e9yU6J94akSysh8=
+  file: cv_delay.pdf
+  on:
+    repo: ElCep/curriculum_vitae
