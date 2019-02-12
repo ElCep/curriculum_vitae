@@ -5,7 +5,7 @@ services:
 before_install:
 - docker pull thomasweise/docker-texlive-full
 script:
-- docker run --tty --rm --volume $PWD:/work thomasweise/docker-texlive-full bash -c "xelatex cv_delay; biber cv_delay; xelatex cv_delay"
+- docker run --tty --rm --volume $PWD:/work thomasweise/docker-texlive-full bash -c "xelatex cv_delay.tex; biber cv_delay.bcf; xelatex cv_delay.tex"
 
 deploy:
   provider: releases
