@@ -16,12 +16,21 @@ script:
   fc-cache -fv;
   xelatex cv_delay.tex;
   biber cv_delay.bcf;
-  xelatex cv_delay.tex"
+  xelatex cv_delay.tex;
+  xelatex cv_delay_eng.tex;
+  biber cv_delay_eng.bcf;
+  xelatex cv_delay_eng.tex"
 
 deploy:
   provider: releases
   api_key:
     secure: mJbViHrMJzso+2NFVva657Y5H6CO1dKX+hM85skiRWQkU615y4hFkPgMZmtF1K3mAC0iir7Na8B9+Cvhj5ESlEhtAMtavcGQB+cWM8gMAwSfjOnhDzIWjMBUZB0zDLot64dk3zOv5E8jhm8gmzUc0cDj5ff34eFqptIJuppuQY6DUqIWBiW2t9L1LOYw2wqRKhI62vF505YcyFXJAKPKCipG2Xb/xjF2iiqm90WEJcLI0p0LrU4NOxFuBgBYCHU01P2rLFhW5IMfN2T1EQaryWZxJq4hgKm7E5IPxp8o9EynRD4iNic2BMWJbCMVwF/TJNvM9vTzAhSVMVbum2vxbA1J1CKb1XGV7q9dNt6QEpINYst6bx+th7oS1sK2JT0AG5Vn+r/LplISHguTqew6rFqvv9jo3Lo1ZHOmAuRz6Tz5o0zfVSxa/iHNKOqNPRc1SBQ8i1AWWTYja5rQ5Q3s5KK4LAyAs2lKfd93+kb3MrMR21CrmiWyqGqOVbN25fyxk3KnuGZfPGxjSb2wajvOA/i+u+I6DhLCdREE7OY1gEd7rr6asQpU70fKqI1qn+0InFfcxhqT1C9FMFV1WhbJFDtPRC0hIWjrsVxGf0cQLVE3WcOykko/lKen0fm6ZQTJVZsShhxxcyLTn09aJGrCrC7pmIz6e9yU6J94akSysh8=
-  file: cv_delay.pdf
+  file:
+    - cv_delay.pdf
+    - cv_delay_eng.pdf
+  name: CV-build-$(date +'%F-%T')
   on:
     repo: ElCep/curriculum_vitae
+    tag: true
+    branch: master
+  skip_cleanup: true
