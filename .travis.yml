@@ -12,7 +12,7 @@ script:
   unzip xits-math-master.zip;
   tar -xzf ttf-mac-fonts.tar.gz;
   cd ../;
-  cp -rfv .fonts /usr/share/fonts/;
+  cp -rfv fonts/* /usr/share/fonts/;
   fc-cache -fv;
   xelatex cv_delay.tex;
   biber cv_delay.bcf;
