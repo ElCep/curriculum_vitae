@@ -4,9 +4,9 @@ sudo: required
 services:
 - docker
 before_install:
-- docker pull konraifen88/biber-texlive
+- docker pull mosauter/texlive-biber
 script:
-- docker run -u root --tty --rm --volume $PWD:/work konraifen88/biber-texlive bash -c "
+- docker run -u root --tty --rm --volume $PWD:/work mosauter/texlive-biber bash -c "
   cd fonts/;
   unzip awesome-terminal-fonts-master.zip;
   unzip xits-math-master.zip;
