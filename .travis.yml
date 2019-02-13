@@ -6,7 +6,7 @@ services:
 before_install:
 - docker pull niconavarro/ubuntu-texlive-biber
 script:
-- docker run -u root --tty --rm --volume $PWD:/work dpollet/texlive:full bash -c "
+- docker run -u root --tty --rm --volume $PWD:/work niconavarro/ubuntu-texlive-biber bash -c "
   cd fonts/;
   unzip awesome-terminal-fonts-master.zip;
   unzip xits-math-master.zip;
