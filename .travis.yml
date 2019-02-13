@@ -14,6 +14,7 @@ script:
   cd ../;
   cp -rfv fonts/* /usr/share/fonts/;
   fc-cache -fv;
+  sudo apt install --yes biber;
   xelatex cv_delay.tex;
   biber cv_delay.bcf;
   xelatex cv_delay.tex;
