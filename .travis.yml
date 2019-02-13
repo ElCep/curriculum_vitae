@@ -4,7 +4,7 @@ sudo: required
 services:
 - docker
 before_install:
-- docker pull dpollet/texlive:full
+- docker pull niconavarro/ubuntu-texlive-biber
 script:
 - docker run -u root --tty --rm --volume $PWD:/work dpollet/texlive:full bash -c "
   cd fonts/;
