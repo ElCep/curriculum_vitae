@@ -6,7 +6,7 @@ services:
 before_install:
 - docker pull blang/latex:ctanfull
 script:
-- docker run -u root --tty --rm --volume $PWD:/work pull dpollet/texlive:full bash -c "
+- docker run -u root --tty --rm --volume $PWD:/work pull blang/latex:ctanfull bash -c "
   cd fonts/;
   unzip awesome-terminal-fonts-master.zip;
   unzip xits-math-master.zip;
