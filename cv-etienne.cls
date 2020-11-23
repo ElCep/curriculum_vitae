@@ -45,7 +45,7 @@
 
 % Fonts
 \RequirePackage[autostyle]{csquotes}
-\RequirePackage[quiet]{fontspec}
+\RequirePackage[quiet,no-math]{fontspec}
 \RequirePackage[math-style=TeX]{unicode-math}
 
 \newfontfamily\bodyfont[]{Helvetica Neue}
@@ -174,7 +174,7 @@
 	maxbibnames=99,
 	url=false,
 	 ]{biblatex}
-\DeclareNameAlias{sortname}{last-first}
+\DeclareNameAlias{sortname}{family-given}
 %\DeclareNameFormat{author}{%
 %  \small\addfontfeature{Color=lightgray}%
 %  \ifblank{#3}{}{#3\space}#1%
@@ -260,6 +260,7 @@
 
 \newcommand{\printbibsection}[2]{
   \begin{refsection}
+    \newrefcontext
     \nocite{*}
     \printbibliography[type={#1}, title={#2}, heading=subbibliography]
   \end{refsection}
