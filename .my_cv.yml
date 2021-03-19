@@ -1,0 +1,9 @@
+pdf:
+  image: thomasweise/texlive
+  script:
+    - xelatex.sh delay_cv
+    - biber.sh delay_cv
+    - xelatex.sh delay_cv
+  artifacts:
+    paths:
+    - delay_cv.pdf
