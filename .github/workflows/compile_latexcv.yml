@@ -1,0 +1,13 @@
+name: Build LaTeX document
+on: [push]
+jobs:
+  runMultipleCommands:
+    runs-on: ubuntu-latest
+    container:
+      image: rekentuig/awesome-cv
+    steps:
+      - uses: actions/checkout@v2
+      - name: Compile LaTeX documents
+      - run: |
+          echo "run latex in docker"
+          docker run -v `pwd`:/src awesome-cv /bin/bash -c "cd /src; xelatex delay_cv; biber delay_cv; xelatex delay_cv"
