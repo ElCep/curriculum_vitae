@@ -1,13 +1,14 @@
 name: Build LaTeX document
 on: [push]
 jobs:
-  build_latex:
+  runMultipleCommands:
     runs-on: ubuntu-latest
+    container:
+      image: rekentuig/awesome-cv
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v2
-      - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v2
-        with:
-          root_file: delay_cv.tex
-          latexmk_use_xelatex: true
+      - name: Compile LaTeX documents
+      - run: |
+          echo "run latex in docker"
+          docker run -v `pwd`:/src awesome-cv /bin/bash -c "cd /src; xelatex delay_cv; biber delay_cv; xelatex delay_cv"
