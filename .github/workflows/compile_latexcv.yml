@@ -2,12 +2,11 @@ name: Build LaTeX document
 on: [push]
 jobs:
   runMultipleCommands:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #it run on a virtual machin
     container:
-      image: rekentuig/awesome-cv
+      image: rekentuig/awesome-cv # use this container
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2 # clone the repo in the virtual machine 
       - name: Compile LaTeX documents
-      - run: |
-          echo "run latex in docker"
-          docker run -v `pwd`:/src awesome-cv /bin/bash -c "cd /src; xelatex delay_cv; biber delay_cv; xelatex delay_cv"
+      # run in the container the 3 latex com. line to compile
+      - run: docker run -v `pwd`:/src awesome-cv /bin/bash -c "cd /src; xelatex delay_cv; biber delay_cv; xelatex delay_cv"
