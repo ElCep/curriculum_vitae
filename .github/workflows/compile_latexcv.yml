@@ -1,12 +1,15 @@
-name: Build LaTeX document
+name: Awesome-CV-CI
+
 on: [push]
+
 jobs:
-  runMultipleCommands:
-    runs-on: ubuntu-latest #it run on a virtual machin
-    container:
-      image: rekentuig/awesome-cv # use this container
+  awesome-cv-job:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2 # clone the repo in the virtual machine 
-      - name: Compile LaTeX documents
-      # run in the container the 3 latex com. line to compile
-      - run: docker run -v `pwd`:/src awesome-cv /bin/bash -c "cd /src; xelatex delay_cv; biber delay_cv; xelatex delay_cv"
+    - uses: actions/checkout@v1
+    - uses: olivierodo/awesome-cv-action@0.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        FILE_NAME: 'delay_cv.tex'
+        LATEST_TAG: 'false' # set to false if you don't want an auto tag of latest 
