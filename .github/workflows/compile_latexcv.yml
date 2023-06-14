@@ -13,12 +13,6 @@ jobs:
     - name: Build LaTeX document
       run: |
         docker run -u $UID:$GID --rm -v $PWD:/work csmith/awesome-cv-builder xelatex -interaction=nonstopmode -halt-on-error delay_cv.tex
-      uses: actions/latex-biber-action@v2
-        with:
-          filename: delay_cv
-          output-directory: 'out'
-      run: |
-        docker run -u $UID:$GID --rm -v $PWD:/work csmith/awesome-cv-builder xelatex -interaction=nonstopmode -halt-on-error delay_cv.tex  
     - name: Upload built PDF
       uses: actions/upload-artifact@v3
       with:
