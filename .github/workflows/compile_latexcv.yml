@@ -16,7 +16,7 @@ jobs:
     
     - name: Copy PDF to workspace
       run: |
-        cp /work/delay_cv.pdf ${{ github.workspace }}/delay_cv.pdf
+        cp /data/delay_cv.pdf ${{ github.workspace }}/delay_cv.pdf
         
     - name: Upload built PDF
       uses: actions/upload-artifact@v2
