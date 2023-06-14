@@ -14,6 +14,10 @@ jobs:
       run: |
         docker run -u $UID:$GID --rm -v $PWD:/work csmith/awesome-cv-builder xelatex -interaction=nonstopmode -halt-on-error delay_cv.tex
     
+    - name: List files in workspace
+      run: |
+        ls -R ${{ github.workspace }}
+        
     - name: Copy PDF to workspace
       run: |
         cp /data/delay_cv.pdf ${{ github.workspace }}/delay_cv.pdf
