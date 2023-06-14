@@ -4,23 +4,9 @@ sudo: required
 services:
 - docker
 before_install:
-- docker pull blang/latex:ctanfull
+- docker pull csmith/awesome-cv-builder
 script:
-- docker run -u root --tty --rm --volume $PWD:/work pull blang/latex:ctanfull bash -c "
-  cd fonts/;
-  unzip awesome-terminal-fonts-master.zip;
-  unzip xits-math-master.zip;
-  tar -xzf ttf-mac-fonts.tar.gz;
-  cd ../;
-  cp -rfv fonts/* /usr/share/fonts/;
-  fc-cache -fv;
-  sudo apt install --yes biber;
-  xelatex cv_delay.tex;
-  biber cv_delay.bcf;
-  xelatex cv_delay.tex;
-  xelatex cv_delay_eng.tex;
-  biber cv_delay_eng.bcf;
-  xelatex cv_delay_eng.tex"
+- docker run -u $UID:$GID --rm -v $PWD:/work csmith/awesome-cv-builder
 
 deploy:
   provider: releases
