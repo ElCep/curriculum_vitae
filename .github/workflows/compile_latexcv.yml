@@ -17,5 +17,5 @@ jobs:
     - name: Upload built PDF
       uses: actions/upload-artifact@v3
       with:
-        name: CV
+        name: Download my last CV
         path: ${{ github.workspace }}/delay_cv.pdf
