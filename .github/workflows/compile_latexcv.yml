@@ -1,15 +1,24 @@
-name: Awesome-CV-CI
+name: LaTeX Build
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  awesome-cv-job:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v1
-    - uses: olivierodo/awesome-cv-action@0.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Set up Git repository
+      uses: actions/checkout@v2
+
+    - name: Build LaTeX document
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/data csmith/awesome-cv-builder xelatex -interaction=nonstopmode -halt-on-error delay_cv.tex
+
+    - name: Upload built PDF
+      uses: actions/upload-artifact@v2
       with:
-        FILE_NAME: 'delay_cv.tex'
-        LATEST_TAG: 'false' # set to false if you don't want an auto tag of latest 
+        name: CV
+        path: delay_cv.pdf
