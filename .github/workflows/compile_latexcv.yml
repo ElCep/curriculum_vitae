@@ -12,7 +12,7 @@ jobs:
 
     - name: Build LaTeX document
       run: |
-        docker run --rm -v ${{ github.workspace }}:/data csmith/awesome-cv-builder xelatex -interaction=nonstopmode -halt-on-error delay_cv.tex
+        docker run -u $UID:$GID --rm -v $PWD:/work csmith/awesome-cv-builder xelatex -interaction=nonstopmode -halt-on-error delay_cv.tex
 
     - name: Upload built PDF
       uses: actions/upload-artifact@v2
