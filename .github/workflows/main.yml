@@ -23,3 +23,7 @@ jobs:
         path: ${{ github.workspace }}/delay_cv.pdf
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Output URL
+        run: echo "::set-output name=pdf_url::$(jq -r '.artifact_url' ${{ steps.upload_pdf.outputs.upload_artifact_id }}.json)"
+  
