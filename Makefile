@@ -9,5 +9,5 @@ CV_SRCS = $(shell find $(CV_DIR) -name '*.tex')
 
 cv.pdf: $(EXAMPLES_DIR)/delay_cv.tex $(CV_SRCS)
 	$(CC) -output-directory=$(EXAMPLES_DIR) $<
-	$(BIBER) $(EXAMPLES_DIR)/cv
+	$(BIBER) $(EXAMPLES_DIR)/delay_cv
 	$(CC) -output-directory=$(EXAMPLES_DIR) $<
