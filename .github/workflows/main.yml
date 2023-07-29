@@ -17,6 +17,7 @@ jobs:
       run: make
 
     - name: Upload built PDF
+      id: upload_pdf
       uses: actions/upload-artifact@v3
       with:
         name: Download my last CV
@@ -25,5 +26,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Output URL
-        run: echo "::set-output name=pdf_url::$(jq -r '.artifact_url' ${{ steps.upload_pdf.outputs.upload_artifact_id }}.json)"
-  
+      run: echo "::set-output name=pdf_url::${{ steps.upload_pdf.outputs.artifact_url }}"
