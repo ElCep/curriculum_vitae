@@ -1,4 +1,5 @@
-[![Download CV](https://img.shields.io/badge/Download-CV-blue?logo=github)](${{ steps.upload_pdf.outputs.pdf_url }})
+[![Download CV](https://img.shields.io/badge/Download-CV-blue?logo=github)](${{ env.PDF_URL }}/delay_cv.pdf)
+
 
 
 
