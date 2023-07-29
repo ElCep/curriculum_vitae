@@ -21,3 +21,5 @@ jobs:
       with:
         name: Download my last CV
         path: ${{ github.workspace }}/delay_cv.pdf
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
