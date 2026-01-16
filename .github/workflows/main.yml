@@ -10,20 +10,21 @@ jobs:
     container: texlive/texlive:latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-    - name: Compile
-      run: make
+      - name: Compile
+        run: make
 
-    - name: Upload built PDF
-      id: upload_pdf
-      uses: actions/upload-artifact@v3
-      with:
-        name: Download my last CV
-        path: ${{ github.workspace }}/delay_cv.pdf
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload built PDF
+        id: upload_pdf
+        uses: actions/upload-artifact@v4
+        with:
+          name: Download my last CV
+          path: ${{ github.workspace }}/delay_cv.pdf
 
-    - name: Set output URL
-      run: echo "PDF_URL=${{ steps.upload_pdf.outputs.artifact_url }}" >> $GITHUB_ENV
+      - name: Set output URL
+        run: |
+          echo "ARTIFACT_ID=${{ steps.upload_pdf.outputs.artifact-id }}" >> $GITHUB_ENV
+          echo "PDF_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
+
